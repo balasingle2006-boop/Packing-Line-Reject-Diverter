@@ -1,28 +1,44 @@
-# Inputs
-guard_closed = False
+import winsound
+
+guard_closed = True
 emergency_stop = False
-reset_button = False
+reset_button = True
 weight_sensor = 97
 
-# Check Emergency Stop
+
+alarm = False
+
+
 if emergency_stop:
     print("EMERGENCY STOP")
     print("Motor OFF")
+    alarm = True
 
-# Check Guard
+
 elif not guard_closed:
     print("Guard is Open")
     print("Motor OFF")
+    alarm = True
 
-# Check Sensor Fault
+
 elif weight_sensor == -1:
     print("Sensor Fault")
     print("Motor OFF")
+    alarm = True
 
-# Normal Operation
+
 else:
     print("Machine Running")
+    alarm = False
 
-# Reset
+
+if alarm:
+    print("Alarm ON")
+    winsound.Beep(1000, 1000)   # 1000 Hz for 1 second
+else:
+    print("Alarm OFF")
+
+
 if reset_button:
     print("System Reset")
+    
